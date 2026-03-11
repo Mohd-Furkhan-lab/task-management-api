@@ -13,7 +13,6 @@ class Task(Base):
 def get_all_tasks(user_id):
     with SessionLocal() as db:
         data=db.query(Task).filter(Task.user_id == user_id).all()
-        print(data)
         return data
 
 

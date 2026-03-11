@@ -16,11 +16,12 @@ def jwt_required(func):
         token = auth_header.split(" ")[1]
 
         payload = verify_jwt_token(token)
+        
 
         if not payload:
             return JSONResponse({"message": "Invalid or expired token"}, status_code=401)
 
-        request.state.user = payload["user_id"]
+        request.state.user_id = payload["user_id"]
 
         return await func(request, *args, **kwargs)
 

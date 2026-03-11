@@ -6,26 +6,26 @@ from middelware.jwt_decorator import jwt_required
 @tasks.get('/')
 @jwt_required
 async def gettasks(request:Request,state:str|None=None,user_id:int|None=None):
-    data=await request.json()
+    data=request
     if state:
         return await gettaskbystate_controller(data,state)
-    return await get_alltask_controller(data)
+    return await get_alltask_controller(request)
 
 @tasks.post('/')
 @jwt_required
 async def addtaks(request:Request):
-    data=await request.json()
-    return await addtask_controller(data)
+    data=request
+    return await addtask_controller(request,data)
 
 @tasks.put('/{id}')
 @jwt_required
-async def update(id:int,request:Request):
-    data=await request.json()
-    return await updatetask_controller(id,data)
+async def update(request:Request,id:int):
+    data=request
+    return await updatetask_controller(request,id,data)
 
 
 @tasks.delete('/{id}')
 @jwt_required
-async def homeapi(id:int,request:Request):
-    data=await request.json()
-    return await deletetask_contoller(id,data)
+async def homeapi(request:Request,id:int):
+    data=request
+    return await deletetask_contoller(request,id)
