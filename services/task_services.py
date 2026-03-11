@@ -2,7 +2,6 @@ from database.tasks_model import get_all_tasks,get_tasks_bystate,add_tasks,updat
 
 def get_task(id):
     user_id=id
-    print(id)
     data=get_all_tasks(user_id)
     return {"data":data}
 
